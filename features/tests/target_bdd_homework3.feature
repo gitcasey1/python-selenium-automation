@@ -12,3 +12,9 @@ Feature: Test functionality
     When Click Sign In
     When From right side navigation menu, click Sign In
     Then Verify Sign In form opened
+
+
+  Scenario: Verify user can search for a beverage
+    Given Open target.com
+    When Search for juice
+    Then Verify user sees search results for juice
