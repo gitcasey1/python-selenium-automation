@@ -1,5 +1,6 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from behave import given, when, then
 from time import sleep
 
@@ -36,3 +37,31 @@ def click_view_cart(context):
 def verify_added_product(context):
     actual_text = context.driver.find_element(By.CSS_SELECTOR, "[data-test='cartItem-linked-title']").text
     assert 'Minute Maid Fruit Punch Juice - 59 fl oz' in actual_text, f'Error! Minute Maid Fruit Punch Juice - 59 fl oz not in {actual_text}'
+
+
+@given('Open https://www.target.com/p/A-91511634')
+def open_target_product(context):
+    context.driver.get('https://www.target.com/p/A-91511634')
+
+
+COLOR_OPTIONS = (By.CSS_SELECTOR, "[class*='ButtonWrapper'] img")
+SELECTED_COLOR = (By.CSS_SELECTOR, "[class*='StyledVariationSelectorImage'] [class*='StyledHeaderWrapperDiv']")
+
+
+@then('Verify that user can select each color that is clicked')
+def verify_colors(context):
+    expected_colors = ['dark khaki', 'black/gum', 'stone/grey', 'white/gum']
+    actual_colors = []
+
+    colors = context.driver.find_elements(*COLOR_OPTIONS)
+    for color in colors:
+        color.click()
+
+        selected_color = context.driver.find_element(*SELECTED_COLOR).text.split('\n')[1]
+        print('Current color', selected_color)
+
+        selected_color = selected_color.split('\n')[1]  # remove 'Color\n' part, keep Black'
+        actual_colors.append(selected_color)
+        print(actual_colors)
+
+    assert expected_colors == actual_colors, f'Expected {expected_colors} did not match actual {actual_colors}'
