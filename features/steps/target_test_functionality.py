@@ -7,7 +7,8 @@ from time import sleep
 
 @given('Open target.com')
 def open_target(context):
-    context.driver.get('https://www.target.com/')
+    # context.driver.get('https://www.target.com/')
+    context.app.main_page.open_main()
 
 
 @when('Click on Cart icon')
@@ -42,11 +43,13 @@ def verify_sign_in(context):
 
 @when('Search for {beverage}')
 def search_beverage(context, beverage):
-    context.driver.find_element(By.ID, 'search').send_keys(beverage)
-    context.driver.find_element(By.CSS_SELECTOR, "button[data-test='@web/Search/SearchButton']").click()
+    # context.driver.find_element(By.ID, 'search').send_keys(beverage)
+    # context.driver.find_element(By.CSS_SELECTOR, "button[data-test='@web/Search/SearchButton']").click()
+    # sleep(6)
+    context.app.header.search_product(beverage)
 
-
-@then('Verify user sees search results for {beverage}')
-def verify_search(context, beverage):
-    search_results = context.driver.find_element(By.XPATH, "//span[text()='for “juice”']").text
-    assert beverage in search_results, f'Error! Search result for {beverage} not in {search_results}'
+@then('Verify user sees search results for {expected_item}')
+def verify_search(context, expected_item):
+    # search_results = context.driver.find_element(By.XPATH, "//span[text()='for “juice”']").text
+    # assert beverage in search_results, f'Error! Search result for {beverage} not in {search_results}'
+    context.app.search_result_page.verify_search_results(expected_item)
