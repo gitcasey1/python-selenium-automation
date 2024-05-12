@@ -24,7 +24,7 @@ def click_add_to_cart(context):
 
 @when('From right side navigation menu, click add to cart button')
 def click_add_to_cart(context):
-    context.driver.find_element(By.ID, "[data-test='orderPickupButton']").click()
+    context.driver.find_element(By.XPATH, "//button[@data-test='orderPickupButton']").click()
     sleep(5)
 
 
@@ -35,8 +35,9 @@ def click_view_cart(context):
 
 @then('Verify added product is in the cart')
 def verify_added_product(context):
-    actual_text = context.driver.find_element(By.CSS_SELECTOR, "[data-test='cartItem-linked-title']").text
-    assert 'Minute Maid Fruit Punch Juice - 59 fl oz' in actual_text, f'Error! Minute Maid Fruit Punch Juice - 59 fl oz not in {actual_text}'
+    actual_text = context.driver.find_element(By.XPATH, "//div[@data-test='cartItem-title']").text
+    assert 'Minute Maid Fruit Punch Juice - 59 fl oz' in actual_text, (f'Error! Minute Maid Fruit Punch Juice - 59 fl '
+                                                                       f'oz not in {actual_text}')
 
 
 @given('Open https://www.target.com/p/A-91511634')

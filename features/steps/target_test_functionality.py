@@ -25,19 +25,22 @@ def verify_cart_empty(context):
 
 @when('Click Sign In')
 def click_sign_in(context):
-    context.driver.find_element(By.CSS_SELECTOR, "span.styles__LinkText-sc-1e1g60c-3.dZfgoT.h-margin-r-x3").click()
-    sleep(5)
+    # context.driver.find_element(By.CSS_SELECTOR, "span.styles__LinkText-sc-1e1g60c-3.dZfgoT.h-margin-r-x3").click()
+    # sleep(5)
+    context.app.header.click_sign_in()
 
 
 @when('From right side navigation menu, click Sign In')
 def click_sign_in(context):
-    context.driver.find_element(By.XPATH, "//a[@data-test='accountNav-signIn']").click()
-    sleep(5)
+    # context.driver.find_element(By.XPATH, "//a[@data-test='accountNav-signIn']").click()
+    # sleep(5)
+    context.app.side_menu_sign_in.click_sign_in()
 
 
 @then('Verify Sign In form opened')
 def verify_sign_in(context):
-    actual_text = context.driver.find_element(By.XPATH, "//h1[@class='styles__StyledHeading-sc-1xmf98v-0 styles__AuthHeading-sc-kz6dq2-2 jhKFiw kcHdEa']").text
+    actual_text = context.driver.find_element(By.XPATH, "//h1[@class='styles__StyledHeading-sc-1xmf98v-0 "
+                                                        "styles__AuthHeading-sc-kz6dq2-2 jhKFiw kcHdEa']").text
     assert 'Sign into your Target account' in actual_text, f'Error! Text Sign into your Target account not in {actual_text}'
 
 
