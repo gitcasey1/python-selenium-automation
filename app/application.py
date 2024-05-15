@@ -4,6 +4,7 @@ from pages.header import Header
 from pages.main_page import MainPage
 from pages.search_results_page import SearchResultsPage
 from pages.side_menu_sign_in import SideMenuSignIn
+from pages.target_terms_conditions_page import TargetTermsConditionsPage
 
 
 class Application:
@@ -15,3 +16,4 @@ class Application:
         self.main_page = MainPage(driver)
         self.search_result_page = SearchResultsPage(driver)
         self.side_menu_sign_in = SideMenuSignIn(driver)
+        self.target_terms_conditions_page = TargetTermsConditionsPage(driver)
